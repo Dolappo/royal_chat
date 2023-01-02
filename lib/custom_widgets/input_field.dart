@@ -4,9 +4,10 @@ import '../colors.dart';
 class InputField extends StatelessWidget {
   final keyboardType;
   final bool isPassword;
-  final hintText;
-  final onChanged;
-  InputField({this.hintText, this.isPassword, this.onChanged, this.keyboardType});
+  final String hintText;
+  final void Function(String) onChanged;
+  final TextEditingController controller;
+  InputField({this.hintText, this.isPassword, this.onChanged, this.keyboardType, this.controller});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,6 +22,7 @@ class InputField extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only( bottom: 8),
             child: TextField(
+              controller: controller,
               keyboardType: keyboardType,
               enableSuggestions: true,
               onChanged: onChanged,
