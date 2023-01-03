@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../colors.dart';
 class InputField extends StatelessWidget {
-  final keyboardType;
+  final TextInputType? keyboardType;
   final bool isPassword;
-  final String hintText;
-  final void Function(String) onChanged;
-  final TextEditingController controller;
-  InputField({this.hintText, this.isPassword, this.onChanged, this.keyboardType, this.controller});
+  final String? hintText;
+  final void Function(String)? onChanged;
+  final TextEditingController? controller;
+  InputField({this.hintText, this.isPassword = false, this.onChanged, this.keyboardType, this.controller});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +15,7 @@ class InputField extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left:25.0),
-          child: Text(hintText, style: TextStyle(color: Colors.grey, fontSize: 12),),
+          child: Text(hintText??"", style: TextStyle(color: Colors.grey, fontSize: 12),),
         ),
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
