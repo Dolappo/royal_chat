@@ -1,13 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:royal_chat/Screens/Login_screen.dart';
-import 'package:royal_chat/Screens/chat_screen.dart';
-import 'package:royal_chat/Screens/sign_up_screen.dart';
-import 'package:royal_chat/Screens/signlog_screen.dart';
+import 'package:royal_chat/ui/Screens/Login_screen.dart';
+import 'package:royal_chat/ui/Screens/chat_feature/chat_screen.dart';
+import 'package:royal_chat/ui/Screens/sign_up_screen.dart';
+import 'package:royal_chat/ui/Screens/signlog_screen.dart';
+import 'package:royal_chat/ui/Screens/welcome_screen.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-import 'Screens/welcome_screen.dart';
+import 'app.dart';
+import 'app/app_setup.router.dart';
 
-void main() {
+void main() async{
+ await App.initialize();
   runApp(MyApp());
 }
 
@@ -19,10 +23,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
  @override
-  void initState()async {
+  void initState() {
     // TODO: implement initState
     super.initState();
-    await Firebase.initializeApp();
+    // await Firebase.initializeApp();
   }
   @override
   Widget build(BuildContext context) {
@@ -30,14 +34,9 @@ class _MyAppState extends State<MyApp> {
       title: 'Royal Chat',
       debugShowCheckedModeBanner: false,
       home: WelcomeScreen(),
-      initialRoute: WelcomeScreen.id,
-      routes: {
-        WelcomeScreen.id: (context)=>WelcomeScreen(),
-        DecisionScreen.id: (context)=> DecisionScreen(),
-        LoginScreen.id: (context)=>LoginScreen(),
-        SignUpScreen.id: (context)=>SignUpScreen(),
-        ChatScreen.id: (context)=>ChatScreen(),
-    },
+      navigatorKey: StackedService.navigatorKey,
+      onGenerateRoute: StackedRouter().onGenerateRoute,
+      initialRoute: Routes.welcomeScreen,
     );
   }
 }
