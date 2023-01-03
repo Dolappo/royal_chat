@@ -8,6 +8,7 @@ import 'package:royal_chat/core/service/firestore_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../core/model/chat_model.dart';
 import 'chat_screen.dart';
 
 class ChatViewModel extends BaseViewModel{
@@ -28,7 +29,7 @@ class ChatViewModel extends BaseViewModel{
   Future<void> sendMessage() async{
    await _fstore.messageCollection.add(ChatModel(
       text: messageTextController.text,
-      // timeStamp: DateTime.now(),
+      timeStamp: DateTime.now(),
       // isMe: true,
       user: currentUser,
     ).toJson());
@@ -39,7 +40,7 @@ class ChatViewModel extends BaseViewModel{
   Stream<List<ChatModel>>? get chatStream => _fstore.chatStream;
 
   Future<void> openChatStream() async{
-    await _fstore.streamMessages("faldolapo@gmail.com");
+    await _fstore.streamMessages("hey@gmail.com");
   }
 
 }
