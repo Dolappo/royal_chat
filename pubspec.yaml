@@ -30,6 +30,7 @@ dependencies:
   animated_text_kit: ^4.2.1
 #  cloud_firestore: ^2.5.3
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
+  image_picker: ^0.8.6
 
 
 
@@ -41,6 +42,7 @@ dependencies:
   stacked_generator: ^0.8.1
   build_runner: ^2.3.3
   shared_preferences: ^2.0.15
+  json_serializable: ^6.5.4
 
 dev_dependencies:
   flutter_test:

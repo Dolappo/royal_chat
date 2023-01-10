@@ -19,6 +19,7 @@ class MessagesStream extends ViewModelWidget<ChatViewModel> {
           }
           List<ChatModel> messages = snapshot.data!;
           return Column(
+
             children: List.generate(
                 messages.length,
                     (index) => MessageBubble(

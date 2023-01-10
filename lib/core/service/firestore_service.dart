@@ -19,7 +19,7 @@ class FirestoreService {
     print("User email: $userEmail");
     chatStream = _fStore
         .collection(messagesPath)
-        .orderBy("timeStamp.", descending: true)
+        // .orderBy("timeStamp")
         .where("user", whereIn: [chatPartnerMail, userEmail!])
         .snapshots()
         .map((event) {
