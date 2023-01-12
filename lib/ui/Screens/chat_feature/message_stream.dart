@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
 import '../../../core/model/chat_model.dart';
 import '../../widgets/message_bubble.dart';
-import 'chat_screen.dart';
 import 'chat_view_model.dart';
 
 class MessagesStream extends ViewModelWidget<ChatViewModel> {
