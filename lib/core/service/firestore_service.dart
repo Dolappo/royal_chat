@@ -19,13 +19,13 @@ class FirestoreService {
     print("User email: $userEmail");
     chatStream = _fStore
         .collection(messagesPath)
-        // .orderBy("timeStamp")
+        .orderBy("timeStamp")
         .where("user", whereIn: [chatPartnerMail, userEmail!])
         .snapshots()
         .map((event) {
           if (event.docs.isNotEmpty) {
             return event.docs.map((e) {
-              print(e.data());
+              print('Chats: ${e.data()}');
               ChatModel chat = ChatModel.fromJson(e.data());
               return chat;
             }).toList();

@@ -16,9 +16,14 @@ class ChatViewModel extends BaseViewModel{
   final _fstore = locator<FirestoreService>();
   final _nav = locator<NavigationService>();
 
+  ChatViewModel(){
+    openChatStream();
+  }
+
+
   TextEditingController messageTextController = TextEditingController();
   String? message;
-  final fireStore = FirebaseFirestore.instance;
+  // final fireStore = FirebaseFirestore.instance;
 
   String? get currentUser => _fstore.userEmail??"";
 

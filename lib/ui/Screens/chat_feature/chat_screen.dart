@@ -13,7 +13,6 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChatViewModel>.reactive(
-        onModelReady: (model) => model.openChatStream(),
         viewModelBuilder: () => ChatViewModel(),
         builder: (context, model, _) {
           return Scaffold(

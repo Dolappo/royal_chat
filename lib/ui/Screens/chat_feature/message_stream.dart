@@ -10,6 +10,7 @@ class MessagesStream extends ViewModelWidget<ChatViewModel> {
     return StreamBuilder<List<ChatModel>>(
         stream: viewModel.chatStream,
         builder: (context, snapshot) {
+          print(snapshot.data?.first.user);
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
