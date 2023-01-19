@@ -26,4 +26,7 @@ extension DateHelpers on DateTime {
     String time = DateFormat.jm().format(this);
     return time;
   }
+  DateTime toDateTimeDate(){
+    return DateTime(this.year, this.month, this.day);
+  }
 }

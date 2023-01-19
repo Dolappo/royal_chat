@@ -2,16 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:royal_chat/ui/Screens/chat_feature/chat_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../colors.dart';
 import 'message_stream.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends HookWidget {
   static const String id = 'chat_screen';
   @override
   Widget build(BuildContext context) {
+    final scrollController =
+        useScrollController();
     return ViewModelBuilder<ChatViewModel>.reactive(
         viewModelBuilder: () => ChatViewModel(),
         builder: (context, model, _) {
@@ -40,8 +43,13 @@ class ChatScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height,
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 60.0),
-                      child: ListView( children: [
-                        MessagesStream(),
+                      child: ListView(
+                        reverse: true,
+                          controller: scrollController,
+                          children: [
+                        MessagesStream(
+                          viewModel: model,
+                        ),
                       ]),
                     ),
                   ),
@@ -62,12 +70,6 @@ class ChatScreen extends StatelessWidget {
                               controller: model.messageTextController,
                               maxLines: null,
                               decoration: InputDecoration(
-                                  prefixIcon: GestureDetector(
-                                      onTap: () {},
-                                      child: Icon(
-                                        Icons.person,
-                                        color: kTextColor,
-                                      )),
                                   hintText: 'Type Message',
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.only(
@@ -82,7 +84,13 @@ class ChatScreen extends StatelessWidget {
                             width: 8,
                           ),
                           GestureDetector(
-                              onTap: model.sendMessage,
+                              onTap: () {
+                                model.sendMessage();
+                                scrollController.animateTo(
+                                    scrollController.position.minScrollExtent,
+                                    duration: Duration(milliseconds: 30),
+                                    curve: Curves.easeOut);
+                              },
                               child: CircleAvatar(
                                 radius: 25,
                                 backgroundColor: kSignUpButtonColor,
@@ -102,8 +110,3 @@ class ChatScreen extends StatelessWidget {
         });
   }
 }
-
-
-
-
-
