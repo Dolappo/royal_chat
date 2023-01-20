@@ -13,8 +13,7 @@ class ChatScreen extends HookWidget {
   static const String id = 'chat_screen';
   @override
   Widget build(BuildContext context) {
-    final scrollController =
-        useScrollController();
+    final scrollController = useScrollController();
     return ViewModelBuilder<ChatViewModel>.reactive(
         viewModelBuilder: () => ChatViewModel(),
         builder: (context, model, _) {
@@ -44,13 +43,13 @@ class ChatScreen extends HookWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 60.0),
                       child: ListView(
-                        reverse: true,
+                          reverse: true,
                           controller: scrollController,
                           children: [
-                        MessagesStream(
-                          viewModel: model,
-                        ),
-                      ]),
+                            MessagesStream(
+                              viewModel: model,
+                            ),
+                          ]),
                     ),
                   ),
                   Positioned(
@@ -66,18 +65,9 @@ class ChatScreen extends HookWidget {
                               color: kBackgroundColor,
                               borderRadius: BorderRadius.circular(30),
                             ),
-                            child: TextField(
+                            child: CustomField(
                               controller: model.messageTextController,
-                              maxLines: null,
-                              decoration: InputDecoration(
-                                  hintText: 'Type Message',
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(
-                                      left: 8, bottom: 10, right: 12, top: 14),
-                                  suffixIcon: Icon(
-                                    Icons.camera_alt,
-                                    color: kTextColor,
-                                  )),
+                              pickImage: model.selectImage,
                             ),
                           ),
                           SizedBox(
@@ -108,5 +98,46 @@ class ChatScreen extends HookWidget {
             ),
           );
         });
+  }
+}
+
+class CustomField extends StatelessWidget {
+  final TextEditingController controller;
+  final void Function()? pickImage;
+  final void Function()? sendImage;
+  final TextStyle? style;
+  final bool isChat;
+  const CustomField({
+    this.style,
+    required this.controller,
+    this.pickImage,
+    this.sendImage,
+    this.isChat = true,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      maxLines: null,
+      style: style,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: isChat?null:Colors.white,
+          hintText: 'Type Message',
+          border: InputBorder.none,
+          contentPadding:
+              EdgeInsets.only(left: 8, bottom: 10, right: 12, top: 14),
+          suffix:
+          IconButton(
+                  onPressed: isChat?pickImage:sendImage,
+                  icon:isChat? Icon(
+                    Icons.camera_alt,
+                    color: kTextColor,
+                  ):Icon(Icons.send, color: kTextColor,),
+                )
+              ),
+    );
   }
 }
