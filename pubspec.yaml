@@ -43,6 +43,8 @@ dependencies:
   build_runner: ^2.3.3
   shared_preferences: ^2.0.15
   json_serializable: ^6.5.4
+  grouped_list: ^5.1.2
+  flutter_hooks: ^0.18.5+1
 
 dev_dependencies:
   flutter_test:

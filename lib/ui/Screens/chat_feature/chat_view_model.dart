@@ -11,41 +11,41 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../core/model/chat_model.dart';
 import 'chat_screen.dart';
 
-class ChatViewModel extends BaseViewModel{
+class ChatViewModel extends BaseViewModel {
   final _auth = locator<AuthService>();
   final _fstore = locator<FirestoreService>();
   final _nav = locator<NavigationService>();
 
-  ChatViewModel(){
+  ChatViewModel() {
     openChatStream();
   }
-
 
   TextEditingController messageTextController = TextEditingController();
   String? message;
   // final fireStore = FirebaseFirestore.instance;
 
-  String? get currentUser => _fstore.userEmail??"";
+  String? get currentUser => _fstore.userEmail ?? "";
 
-  Future<void> logout() async{
-    await _auth.logout().then((value) => _nav.clearStackAndShow(Routes.loginScreen ));
+  Future<void> logout() async {
+    await _auth
+        .logout()
+        .then((value) => _nav.clearStackAndShow(Routes.loginScreen));
   }
 
-  Future<void> sendMessage() async{
-   await _fstore.messageCollection.add(ChatModel(
+  Future<void> sendMessage() async {
+    await _fstore.messageCollection.add(ChatModel(
       text: messageTextController.text,
       timeStamp: DateTime.now(),
-      // isMe: true,
       user: currentUser,
     ).toJson());
-   messageTextController.clear();
-   notifyListeners();
+    messageTextController.clear();
+    notifyListeners();
   }
 
   Stream<List<ChatModel>>? get chatStream => _fstore.chatStream;
 
-  Future<void> openChatStream() async{
+  Future<void> openChatStream() async {
+    print("Opening stream");
     await _fstore.streamMessages("hey@gmail.com");
   }
-
 }
