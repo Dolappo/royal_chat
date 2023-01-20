@@ -8,10 +8,12 @@ class ChatModel {
    String? user;
    String? text;
    DateTime? timeStamp;
+   String? imgUrl;
   ChatModel({
     this.text,
     this.user,
-    this.timeStamp
+    this.timeStamp,
+    this.imgUrl
   });
 
   factory ChatModel.fromJson(Map<String, dynamic> json) => _$ChatModelFromJson(json);

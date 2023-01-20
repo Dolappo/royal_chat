@@ -45,6 +45,10 @@ dependencies:
   json_serializable: ^6.5.4
   grouped_list: ^5.1.2
   flutter_hooks: ^0.18.5+1
+  file_picker: ^5.2.5
+  firebase_storage: ^11.0.10
+  cached_network_image: ^3.2.1
+  image_picker_web: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:
